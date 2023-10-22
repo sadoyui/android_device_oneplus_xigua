@@ -151,6 +151,9 @@ PRODUCT_VENDOR_PROPERTIES += \
     ro.surface_flinger.use_content_detection_for_refresh_rate=true \
     vendor.display.primary_mixer_stages=9
 
+# Kernel Binary
+KERNEL_PREBUILT_DIR := device/oneplus/xigua-kernel
+
 # FRP
 PRODUCT_VENDOR_PROPERTIES += \
     ro.frp.pst=/dev/block/bootdevice/by-name/frp
@@ -243,7 +246,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/perf/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf
 
 # Platform
-TARGET_BOARD_PLATFORM := lahaina
+TARGET_BOARD_PLATFORM := kalama
 
 # QTEE
 PRODUCT_PROPERTY_OVERRIDES += \

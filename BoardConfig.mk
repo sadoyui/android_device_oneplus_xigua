@@ -12,7 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-DEVICE_PATH := device/oneplus/oneplus9
+DEVICE_PATH := device/oneplus/xigua
+KERNEL_PREBUILT_DIR := device/oneplus/xigua-prebuilt
 
 include build/make/target/board/BoardConfigMainlineCommon.mk
 
@@ -80,7 +81,7 @@ TARGET_SURFACEFLINGER_UDFPS_LIB := //hardware/oplus:libudfps_extension.oplus
 TARGET_SCREEN_DENSITY := 420
 
 # Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := lahaina
+TARGET_BOOTLOADER_BOARD_NAME := kalama
 
 # DTB
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
@@ -105,49 +106,54 @@ BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 TARGET_INIT_VENDOR_LIB := //$(DEVICE_PATH):libinit_oplus
 
 # Kernel
-BOARD_KERNEL_CMDLINE := \
-    androidboot.console=ttyMSM0 \
+BOARD_BOOTCONFIG := \
     androidboot.hardware=qcom \
     androidboot.memcg=1 \
-    androidboot.usbcontroller=a600000.dwc3 \
-    cgroup.memory=nokmem,nosocket \
-    console=ttyMSM0,115200n8 \
-    ip6table_raw.raw_before_defrag=1 \
-    iptable_raw.raw_before_defrag=1 \
-    loop.max_part=7 \
-    lpm_levels.sleep_disabled=1 \
-    msm_rtb.filter=0x237 \
-    pcie_ports=compat \
-    service_locator.enable=1 \
-    swiotlb=0
+    androidboot.usbcontroller=a600000.dwc3
 
-BOARD_KERNEL_BASE := 0x00000000
-BOARD_KERNEL_BINARIES := kernel
+BOARD_KERNEL_CMDLINE := \
+    disable_dma32=on \
+    mtdoops.fingerprint=$(AOSPA_VERSION) \
+    video=vfb:640x400,bpp=32,memsize=3072000
+
+BOARD_BOOTCONFIG += androidboot.selinux=permissive
+
 BOARD_KERNEL_PAGESIZE := 4096
-KERNEL_DEFCONFIG := vendor/lahaina-qgki_defconfig
-USE_KERNEL_AOSP_LLVM := true
+BOARD_USES_GENERIC_KERNEL_IMAGE := true
+TARGET_HAS_GENERIC_KERNEL_HEADERS := true
 
-# OTA
-TARGET_OTA_ASSERT_DEVICE := OnePlus9,oneplus9
+# Kernel Modules
+BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(strip $(shell cat $(KERNEL_PREBUILT_DIR)/modules.load.recovery))
 
 # Partitions
-BOARD_BOOTIMAGE_PARTITION_SIZE := 0xC000000
-BOARD_DTBOIMG_PARTITION_SIZE := 0x1800000
-BOARD_FLASH_BLOCK_SIZE := 131072
-BOARD_KERNEL-GKI_BOOTIMAGE_PARTITION_SIZE := $(BOARD_BOOTIMAGE_PARTITION_SIZE)
-BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := $(BOARD_BOOTIMAGE_PARTITION_SIZE)
+# Partitions
+BOARD_BOOTIMAGE_PARTITION_SIZE := 201326592
+BOARD_DTBOIMG_PARTITION_SIZE := 25165824
+BOARD_INIT_BOOT_IMAGE_PARTITION_SIZE := 8388608
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 104857600
+BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 100663296
 
-BOARD_SUPER_PARTITION_SIZE := 11190403072
-BOARD_SUPER_PARTITION_GROUPS := oneplus_dynamic_partitions
-BOARD_ONEPLUS_DYNAMIC_PARTITIONS_PARTITION_LIST := odm product system system_ext vendor
-BOARD_ONEPLUS_DYNAMIC_PARTITIONS_SIZE := 11186403072 # BOARD_SUPER_PARTITION_SIZE - 4MB
+BOARD_SUPER_PARTITION_SIZE := 9663676416
+BOARD_SUPER_PARTITION_GROUPS := qti_dynamic_partitions
+BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST := odm product system system_dlkm system_ext vendor vendor_dlkm
+BOARD_QTI_DYNAMIC_PARTITIONS_SIZE := 9659482112
 
-BOARD_ODMIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_FLASH_BLOCK_SIZE := 262144
+
+BOARD_ODMIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_SYSTEM_DLKMIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_VENDOR_DLKMIMAGE_FILE_SYSTEM_TYPE := erofs
+
 TARGET_COPY_OUT_ODM := odm
+TARGET_COPY_OUT_PRODUCT := product
+TARGET_COPY_OUT_SYSTEM_DLKM := system_dlkm
+TARGET_COPY_OUT_SYSTEM_EXT := system_ext
+TARGET_COPY_OUT_VENDOR := vendor
+TARGET_COPY_OUT_VENDOR_DLKM := vendor_dlkm
 
 # Recovery
 BOARD_INCLUDE_RECOVERY_DTBO := true
