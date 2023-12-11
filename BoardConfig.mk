@@ -13,7 +13,7 @@ DEVICE_PATH := device/oneplus/xigua
 TARGET_SCREEN_DENSITY := 450
 
 # Kernel
-TARGET_KERNEL_CONFIG += vendor/oplus/salami.config
+TARGET_KERNEL_CONFIG += vendor/oplus/xigua.config
 
 # Properties
 TARGET_VENDOR_PROP += $(DEVICE_PATH)/vendor.prop
