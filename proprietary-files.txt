@@ -91,7 +91,6 @@ odm/etc/inparm/iris7_AA536_P_3_A0001_dsc_cmd_mode_panel/inParm2.txt
 odm/etc/inparm/iris7_AA536_P_3_A0001_dsc_cmd_mode_panel/inParm5.txt
 odm/etc/inparm/iris7_AA536_P_3_A0001_dsc_cmd_mode_panel/inParm8.txt
 odm/etc/inparm/irissoft_AA536_P_3_A0001_dsc_cmd_mode_panel/inParm14_2nit.txt
-odm/etc/inparm/irissoft_AA536_P_3_A0001_dsc_cmd_mode_panel/inParm14_3nit.txt
 odm/etc/inparm/irissoft_AA536_P_3_A0001_dsc_cmd_mode_panel/inParm14_low.txt
 odm/etc/inparm/irissoft_AA536_P_3_A0001_dsc_cmd_mode_panel/inParm14.txt
 odm/etc/inparm/irissoft_AA536_P_3_A0001_dsc_cmd_mode_panel/inParm17_2nit.txt
@@ -110,7 +109,6 @@ odm/etc/inparm/irissoft_AA536_P_3_A0001_dsc_cmd_mode_panel/inParm38.txt
 odm/etc/inparm/irissoft_AA536_P_3_A0001_dsc_cmd_mode_panel/inParm5_2nit.txt
 odm/etc/inparm/irissoft_AA536_P_3_A0001_dsc_cmd_mode_panel/inParm5_low.txt
 odm/etc/inparm/irissoft_AA536_P_3_A0001_dsc_cmd_mode_panel/inParm5.txt
-odm/etc/inparm/irissoft_AA536_P_3_A0001_dsc_cmd_mode_panel/inParm8_3nit.txt
 odm/etc/inparm/irissoft_AA536_P_3_A0001_dsc_cmd_mode_panel/inParm8.txt
 odm/etc/inparm/irissoft_AA536_P_3_A0001_dsc_cmd_mode_panel/mcfCheck_2nit.txt
 odm/etc/inparm/irissoft_AA536_P_3_A0001_dsc_cmd_mode_panel/mcfCheck_low.txt
@@ -129,6 +127,11 @@ odm/etc/sensor/config/kailua_mtp_smart_prox.json
 odm/etc/sensor/config/lux_aod.json
 odm/etc/sensor/config/xigua_qrd_ois_system.json
 odm/etc/sensor/sensor_config.json
+
+# Touchscreen firmware
+odm/firmware/tp/22811/FW_S3908_SAMSUNG.img
+odm/firmware/tp/22811/FW_S3908_SAMSUNG_FAE.img
+odm/firmware/tp/22811/LIMIT_S3908_SAMSUNG.img
 
 # WiFi
 odm/etc/wifi/kiwi/bdwlan.elf
